@@ -4,6 +4,7 @@ const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail");
 const { default: mongoose } = require("mongoose");
+require("dotenv").config();
 
 // capture the payment and initiate the razorpay order
 exports.capturePayment = async(req, res) => {
@@ -99,7 +100,7 @@ exports.capturePayment = async(req, res) => {
 
 // verify signature of razorpay and server
 exports.verifySignature = async(req, res) => {
-    const webhookSecret = "12345678";
+    const webhookSecret = process.env.WEBHOOKSECRET;
 
     const signature = req.headers["x-razorpay-signature"];
 
@@ -154,7 +155,7 @@ exports.verifySignature = async(req, res) => {
             const emailResponce = await mailSender(
                                   enrolledStudent.email,
                                   "Congratulations, from StudyNotion",
-                                  "Congratulations, from StudyNotion you are onboarded into a new StudyNotion course.",
+                                  courseEnrollmentEmail,
             );
 
             console.log(emailResponce);
