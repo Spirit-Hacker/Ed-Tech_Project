@@ -74,13 +74,17 @@ exports.deleteAccount = async(req, res) => {
         // delete profile
         await Profile.findByIdAndDelete({_id: userDetails.additionalDetails._id});
 
-        // TODO: HW - un-enroll user from all enrolled courses
-        // not sure if this works
+        // TODO: HW - un-enroll user from all enrolled courses✅
 
-        // const enrolledCourseId = userDetails.courses;
-        // const courseDetails = await Course.findById({_id: enrolledCourseId});
-        // const userFromCourse = courseDetails.studentsEnrolled;
-        // userFromCourse.filter((user) => user._id != id);
+        for(const courseId of userDetails.courses){
+          await Course.findByIdAndUpdate(
+            {courseId},
+            {
+              $pull: {studentsEnrolled: id},
+            },
+            {new: true}
+          )
+        }
 
         // delete user
         await User.findByIdAndDelete({_id: id});
@@ -141,7 +145,7 @@ exports.updateDisplayPicture = async (req, res) => {
         { _id: userId },
         { image: image.secure_url },
         { new: true }
-      )
+      ).populate("additionalDetails").exec()
 
       res.send({
         success: true,
