@@ -9,7 +9,7 @@ node_modules
 .env.example
 .env.local
 .env.staging
-/server/.env
+server/.env
 
 # testing
 /coverage
