@@ -92,7 +92,11 @@ exports.categoryPageDetails = async(req, res) => {
             })
         }
 
+<<<<<<< HEAD
         // get top selling courses ---> HW ✅
+=======
+        // get top 10 selling courses ---> HW ✅
+>>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
 
         const allCategories = await Category.find({})
         .populate("course")

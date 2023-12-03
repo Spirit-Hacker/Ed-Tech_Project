@@ -7,6 +7,21 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
+<<<<<<< HEAD
+=======
+import { BsChevronDown } from "react-icons/bs"
+
+// const subLinks = [
+//     {
+//         title: "Python",
+//         link: "/catalog/python"
+//     },
+//     {
+//         title: "Web Development",
+//         link: "/catalog/webdevelopment"
+//     }
+// ]
+>>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
 
 const Navbar = () => {
 
@@ -20,7 +35,12 @@ const Navbar = () => {
         try {
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing sublinks result", result);
+<<<<<<< HEAD
             setSubLinks(result.data.data);
+=======
+            console.log(result.data)
+            setSubLinks(result.data.allCategories);
+>>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
         }
         catch (error) {
             console.log("Could not fetch the category list")
@@ -56,8 +76,37 @@ const Navbar = () => {
                                     {
                                         element.title === "Catalog"
                                         ? (
+<<<<<<< HEAD
                                             <div>
                                                 
+=======
+                                            <div className='relative flex flex-row justify-center items-center cursor-pointer
+                                                gap-2 group'>
+                                                <p>{element.title}</p>
+                                                <BsChevronDown/>
+
+                                                <div className='absolute flex gap-6 flex-col bg-richblack-5 text-richblack-900
+                                                    opacity-0 rounded-md invisible left-[50%] 
+                                                    top-0 p-4 translate-x-[-50%] translate-y-[15%]
+                                                    transition-all duration-200 group-hover:visible group-hover:opacity-100
+                                                    lg: w-[300px] z-10'>
+
+                                                    <div className='bg-richblack-5 text-richblack-900 absolute h-6 w-6
+                                                        left-[50%] top-0 rounded-sm rotate-45 translate-x-[80%] translate-y-[-45%]'>
+                                                    </div>
+
+                                                    {
+                                                        subLinks.length ? (
+                                                            subLinks.map( (subLink, index) => (
+                                                                <Link to={`/${subLink.name.split(' ').join('').toLowerCase()}`} key={index}>
+                                                                    <div>{subLink.name}</div>
+                                                                </Link>
+                                                            ))
+                                                        ) : (<div></div>)
+                                                    }
+
+                                                </div>
+>>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
                                             </div>
                                         )
                                         : (
