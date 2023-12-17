@@ -1,16 +1,4 @@
-<<<<<<< HEAD
 import React from 'react'
-
-const ProfileDropDown = () => {
-  return (
-    <div>
-        
-    </div>
-  )
-}
-
-export default ProfileDropDown
-=======
 import { useRef, useState } from "react"
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
@@ -68,4 +56,3 @@ export default function ProfileDropdown() {
     </button>
   )
 }
->>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)

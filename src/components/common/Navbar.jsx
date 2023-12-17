@@ -7,21 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
-<<<<<<< HEAD
-=======
 import { BsChevronDown } from "react-icons/bs"
-
-// const subLinks = [
-//     {
-//         title: "Python",
-//         link: "/catalog/python"
-//     },
-//     {
-//         title: "Web Development",
-//         link: "/catalog/webdevelopment"
-//     }
-// ]
->>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
 
 const Navbar = () => {
 
@@ -35,12 +21,10 @@ const Navbar = () => {
         try {
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing sublinks result", result);
-<<<<<<< HEAD
-            setSubLinks(result.data.data);
-=======
+            // setSubLinks(result.data.data);
+
             console.log(result.data)
             setSubLinks(result.data.allCategories);
->>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
         }
         catch (error) {
             console.log("Could not fetch the category list")
@@ -76,10 +60,6 @@ const Navbar = () => {
                                     {
                                         element.title === "Catalog"
                                         ? (
-<<<<<<< HEAD
-                                            <div>
-                                                
-=======
                                             <div className='relative flex flex-row justify-center items-center cursor-pointer
                                                 gap-2 group'>
                                                 <p>{element.title}</p>
@@ -106,7 +86,6 @@ const Navbar = () => {
                                                     }
 
                                                 </div>
->>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
                                             </div>
                                         )
                                         : (
@@ -128,7 +107,7 @@ const Navbar = () => {
             <div className='flex gap-x-4 items-center'>
                 {
                     user && user.accountType !== "Instructor" && (
-                        <Link to={"/dashboard/cart"} className='relative'>
+                        <Link to={"/dashboard/cart"} className='relative text-richblack-5'>
                             <AiOutlineShoppingCart/>
                             {
                                 totalItems > 0 && (

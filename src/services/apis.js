@@ -1,9 +1,5 @@
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
-<<<<<<< HEAD
-export const categories = {
-    CATEGORIES_API: BASE_URL + "/course/showAllCategories",
-=======
 // AUTH ENDPOINTS
 export const endpoints = {
   SENDOTP_API: BASE_URL + "/auth/sendotp",
@@ -72,5 +68,4 @@ export const settingsEndpoints = {
   UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
   CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
->>>>>>> 20e4c08 (hooks, login signup logic, all api, utils)
 }

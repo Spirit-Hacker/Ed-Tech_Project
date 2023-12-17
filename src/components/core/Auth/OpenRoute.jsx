@@ -1,4 +1,4 @@
-// This will prevent authenticated users from accessing this route
+// This will prevent unauthenticated users from accessing this route
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 
