@@ -9,7 +9,7 @@ const ForgotPassword = () => {
     const [emailSent, setEmailSent] = useState(false);
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
-
+ 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(getPasswordResetToken(email, setEmailSent));
