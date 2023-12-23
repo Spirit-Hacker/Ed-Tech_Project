@@ -50,7 +50,7 @@ const LearningGrid = () => {
             LearningGridArray.map( (card, index) => (
                 <div
                     key={index}
-                    className={`${index === 0 && 'lg:col-span-2 lg:h-[280px] p-5 bg-richblack-900'}
+                    className={`${index === 0 && 'lg:col-span-2 lg:h-[280px] bg-richblack-900'}
                         ${
                             card.order % 2 === 1 ? 'bg-richblack-700 lg:h-[280px] p-5' : 'bg-richblack-800 lg:h-[280px] p-5'
                         }

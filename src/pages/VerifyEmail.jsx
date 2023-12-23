@@ -16,7 +16,7 @@ const VerifyEmail = () => {
         if(!signupData){
             navigate('/signup')
         }
-    }, [])
+    })
 
     const handleOnSubmit = (e) => {
         e.preventDefault();

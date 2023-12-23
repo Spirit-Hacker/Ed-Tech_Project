@@ -8,6 +8,7 @@ import FoundingHistory from '../assets/Images/FoundingStory.png'
 import StatsComponent from '../components/core/AboutPage/StatsComponent'
 import LearningGrid from '../components/core/AboutPage/LearningGrid'
 import Footer from '../components/common/Footer'
+import ContactFormSection from '../components/core/AboutPage/ContactFormSection'
 
 const About = () => {
   return (
@@ -23,7 +24,7 @@ const About = () => {
               Studynotion is at the forefront of driving innovation in online education. We're passionate about creating a brighter future by offering cutting-edge courses, leveraging emerging technologies, and nurturing a vibrant learning community.
             </p>
           </header>
-          <div className='absolute flex gap-x-12 w-full mx-auto top-[70%] left-[5%] right-[5%] mb-6'>
+          <div className='lg:absolute flex w-full justify-center gap-x-12 flex-wrap mx-auto  lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] pt-28 mb-6'>
             <img src={BannerImage1} alt='banner'/>
             <img src={BannerImage2} alt='banner'/>
             <img src={BannerImage3} alt='banner'/>
@@ -68,7 +69,7 @@ const About = () => {
             <div className='flex flex-row justify-between items-center gap-52 w-11/12'>
               {/* left box */}
               <div className='w-[50%] flex flex-col gap-12'>
-                <h1 className='text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#ec4b1a] via-[#fa4c07] to-[#ffc524]'>Our Vission</h1>
+                <h1 className='text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#ec4b1a] via-[#fa4c07] to-[#ffc524]'>Our Vision</h1>
                 <p className='text-richblack-400 font-semibold'>
                   With this vision in mind, we set out on a journey to create an e-learning platform that would revolutionize the way people learn. Our team of dedicated experts worked tirelessly to develop a robust and intuitive platform that combines cutting-edge technology with engaging content, fostering a dynamic and interactive learning experience.
                 </p>
@@ -84,15 +85,15 @@ const About = () => {
             </div>
           </div>
         </section>
-
       </div>
 
       {/* Section 4 */}
       <StatsComponent/>
 
       {/* Section 5 */}
-      <section className='w-11/12 mx-auto'>
+      <section className='w-11/12 mx-auto flex flex-col items-center justify-center mb-14'>
         <LearningGrid/>
+        <ContactFormSection/>
       </section>
 
       <Footer/>
