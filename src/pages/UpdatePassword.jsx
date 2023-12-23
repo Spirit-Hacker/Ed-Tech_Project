@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPassword } from '../services/operations/authAPI';
 import { Link, useLocation } from 'react-router-dom';
-import { AiFillEye } from "react-icons/ai";
-import { AiFillEyeInvisible } from "react-icons/ai";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const UpdatePassword = () => {
     const { loading } = useSelector( (state) => state.auth);
@@ -38,53 +39,61 @@ const UpdatePassword = () => {
             loading ? (
                 <div>Loding.....</div>
             ) : (
-                <div>
-                    <h1>Choose a new password</h1>
-                    <p>Almost done. Enter your new password and youre all set.</p>
-                    <form onSubmit={handleOnSubmit}>
-                        <label>
-                            <p>New Password <sup>*</sup></p>
-                            <input 
-                                type={showPassword ? "text" : "password"}
-                                required
-                                name='password' 
-                                value={password}
-                                onChange={handleOnChange}
-                                placeholder='Password'
-                            />
-                            <span
-                                onClick={() => setShowPassword((prev) => !prev)}
-                            >
-                                {
-                                    showPassword ? <AiFillEyeInvisible fontSize={24}/> : <AiFillEye fontSize={24}/>
-                                }
-                            </span>
+                <div className='h-[90vh] w-[32%] flex flex-col items-start justify-center gap-5'>
+                    <h1 className='text-3xl font-semibold'>Choose a new password</h1>
+                    <p className='text-richblack-300 text-lg tracking-wide'>Almost done. Enter your new password and youre all set.</p>
+                    <form onSubmit={handleOnSubmit} className='w-full flex flex-col gap-3'>
+                        <label className='flex flex-col gap-1 w-full'>
+                            <p className='text-sm'>New Password <sup className='text-pink-300'>*</sup></p>
+                            <div className='flex w-full bg-richblack-700 p-3 rounded-lg border-b-[1px] border-richblack-300'>
+                                <input 
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    name='password'
+                                    value={password}
+                                    onChange={handleOnChange}
+                                    placeholder='Password'
+                                    className='bg-transparent w-full'
+                                />
+                                <span className='text-richblack-300'
+                                    onClick={() => setShowPassword((prev) => !prev)}>
+                                    {
+                                        showPassword ? <IoEyeOffOutline fontSize={24}/> : <IoEyeOutline fontSize={24}/>
+                                    }
+                                </span>
+                            </div>
                         </label>
-                        <label>
-                            <p>Confirm New Password <sup>*</sup></p>
-                            <input 
-                                type={showConfirmPassword ? "text" : "password"}
-                                required
-                                name='confirmPassword' 
-                                value={confirmPassword}
-                                onChange={handleOnChange}
-                                placeholder='Confirm Password'
-                            />
-                            <span
-                                onClick={() => setShowConfirmPassword((prev) => !prev)}
-                            >
-                                {
-                                    showConfirmPassword ? <AiFillEyeInvisible fontSize={24}/> : <AiFillEye fontSize={24}/>
-                                }
-                            </span>
+                        <label className='flex flex-col gap-1 w-full'>
+                            <p className='text-sm'>Confirm New Password <sup className='text-pink-300'>*</sup></p>
+                            <div className='flex w-full bg-richblack-700 p-4 rounded-lg border-b-[1px] border-richblack-300'>
+                                <input 
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    required
+                                    name='confirmPassword' 
+                                    value={confirmPassword}
+                                    onChange={handleOnChange}
+                                    placeholder='Confirm Password'
+                                    className='bg-transparent w-full'
+                                />
+                                <span className='text-richblack-300'
+                                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                                >
+                                    {
+                                        showConfirmPassword ? <IoEyeOffOutline fontSize={24}/> : <IoEyeOutline fontSize={24}/>
+                                    }
+                                </span>
+                            </div>
                         </label>
-                        <button type="submit">
+                        <button type="submit" className='bg-yellow-50 mt-6 text-black p-3 rounded-lg'>
                             Reset Password
                         </button>
                     </form>
                     <div>
                         <Link to='/login'>
-                            <p>Back to login</p>
+                            <div className='flex gap-2 justify-center items-center'>
+                                <FaArrowLeft/>
+                                Back to login
+                            </div>
                         </Link>
                     </div>
                 </div>
