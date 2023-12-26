@@ -41,19 +41,19 @@ const ContactForm = () => {
     }, [reset, isSubmitSuccessful]);
 
   return (
-    <form onSubmit={handleSubmit(submitContactForm)}>
-        <div className='flex flex-col gap-10'>
-            <div className='flex gap-5'>
+    <form onSubmit={handleSubmit(submitContactForm)} className='w-full'>
+        <div className='flex flex-col gap-10 w-full'>
+            <div className='flex gap-5 w-full'>
                 {/* First Name */}
-                <div className='flex flex-col'>
-                    <label htmlFor='firstname'>First Name</label>
+                <div className='flex flex-col w-full'>
+                    <label htmlFor='firstname' className='text-sm'>First Name</label>
                     <input
                         type='text'
                         name='firstname'
                         id='firstname'
                         placeholder='Enter First Name'
                         {...register('firstname', {required: true})}
-                        className='text-black'
+                        className='text-richblack-5 outline-none bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300'
                     />
                     {
                         errors.firstname && (
@@ -65,28 +65,28 @@ const ContactForm = () => {
                 </div>
 
                 {/* Last Name */}
-                <div className='flex flex-col'>
-                    <label htmlFor='lastname'>Last Name</label>
+                <div className='flex flex-col w-full'>
+                    <label htmlFor='lastname' className='text-sm'>Last Name</label>
                     <input
                         type='text'
                         name='lastname'
                         id='lastname'
                         placeholder='Enter Last Name'
                         {...register('lastname')}
-                        className='text-black'
+                        className='text-richblack-5 outline-none bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300'
                     />
                 </div>
             </div>
             {/* Email */}
             <div className='flex flex-col'>
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="email" className='text-sm'>Email Address</label>
                 <input
                     type='email'
                     name='email'
                     id='email'
                     placeholder='Enter email address'
                     {...register('email', {required: true})}
-                    className='text-black'
+                    className='text-richblack-5 outline-none bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300'
                 />
                 {
                     errors.email && (
@@ -99,7 +99,7 @@ const ContactForm = () => {
 
             {/* Phone Number */}
             <div className='flex flex-col'>
-                <label htmlFor="phonenumber">Phone Number</label>
+                <label htmlFor="phonenumber" className='text-sm'>Phone Number</label>
                 <div className='flex flex-row gap-5'>
                     {/* Drop Down */}
                     <div className='flex gap-5'>
@@ -107,7 +107,7 @@ const ContactForm = () => {
                             name='dropdown'
                             id='dropdown'
                             {...register("countrycode", {required: true})}
-                            className='text-richblack-700 w-[50px]'
+                            className='text-richblack-5 outline-none bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300 w-[80px]'
                         >
                             {
                                 CountryCode.map( (element, index) => {
@@ -127,7 +127,7 @@ const ContactForm = () => {
                             name='phonenumber'
                             id='phonenumber'
                             placeholder='12345 67890'
-                            className='text-black w-full'
+                            className='text-richblack-5 bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300 w-full outline-none'
                             {...register('phoneNo', {
                                 required: {value: true, message: "Please Enter Phone Number"},
                                 maxLength: {value: 10, message: "Invalid Phone Number"},
@@ -147,7 +147,7 @@ const ContactForm = () => {
 
             {/* Message */}
             <div className='flex flex-col'>
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message" className='text-sm'>Message</label>
                 <textarea
                     name='message'
                     id='message'
@@ -155,7 +155,7 @@ const ContactForm = () => {
                     rows={7}
                     placeholder='Enter your message'
                     {...register('message', {required: true})}
-                    className='text-black'
+                    className='text-richblack-5 bg-richblack-600 p-3 rounded-md border-b-[1px] border-b-richblack-300 outline-none'
                 />
                 {
                     errors.message && (
