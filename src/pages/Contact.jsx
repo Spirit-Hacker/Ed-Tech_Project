@@ -9,8 +9,8 @@ import Footer from '../components/common/Footer';
 const Contact = () => {
   return (
     <div>
-        <div className='w-11/12 mx-auto mt-20 gap-20 flex justify-center items-start mb-14'>
-            <div className='text-white flex flex-col gap-10 bg-richblack-800 rounded-3xl w-[35%] p-10'>
+        <div className='w-11/12 mx-auto mt-20 gap-10 flex justify-center items-start mb-14'>
+            <div className='text-white flex flex-col gap-10 bg-richblack-800 rounded-3xl w-[50%] p-10'>
                 <div className='flex flex-col gap-1'>
                     <div className='flex gap-3 items-center justify-start'>
                         <div className='text-richblack-300 text-2xl'>

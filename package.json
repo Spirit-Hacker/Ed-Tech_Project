@@ -1,5 +1,5 @@
 {
-  "name": "react-tailwind-css-starter-pack",
+  "name": "studynotion",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "redux-toolkit": "^1.1.2",
     "web-vitals": "^2.1.4"
   },
-  "author": "Pranay Gupta",
+  "author": "Pranil Dhutraj",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
