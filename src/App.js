@@ -10,6 +10,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MyProfile from "./components/core/Dashboard/MyProfile";
 
 function App() {
   return (
@@ -61,6 +62,10 @@ function App() {
           path="/contact" element={
             <Contact/>
           }
+        />
+        <Route
+          path="/dashboard/my-profile"
+          element={<MyProfile/>}
         />
       </Routes>
     </div>
