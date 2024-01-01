@@ -15,26 +15,28 @@ const About = () => {
   return (
     <div className='text-white'>
       {/* Section 1 */}
-      <section className='w-[100vw] bg-richblack-700 pt-[100px] pb-[100px] mb-28'>
-
-        <div className='relative flex flex-col h-[50vh] w-full'>
-          <header className='text-center w-[55%] mx-auto text-4xl font-semibold'>
+      <section className="bg-richblack-700">
+        <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
+          <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
             Driving Innovation in Online Education for a
-            <HighlightText text="Brighter Future"/>
-            <p className='font-normal text-lg pt-3 pb-3 text-center text-richblack-400'>
-              Studynotion is at the forefront of driving innovation in online education. We're passionate about creating a brighter future by offering cutting-edge courses, leveraging emerging technologies, and nurturing a vibrant learning community.
+            <HighlightText text={"Brighter Future"} />
+            <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
+              Studynotion is at the forefront of driving innovation in online
+              education. We're passionate about creating a brighter future by
+              offering cutting-edge courses, leveraging emerging technologies,
+              and nurturing a vibrant learning community.
             </p>
           </header>
-          <div className='lg:absolute flex w-full justify-center gap-x-12 flex-wrap mx-auto  lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] pt-28 mb-6'>
-            <img src={BannerImage1} alt='banner'/>
-            <img src={BannerImage2} alt='banner'/>
-            <img src={BannerImage3} alt='banner'/>
+          <div className="sm:h-[70px] lg:h-[150px]"></div>
+          <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
+            <img src={BannerImage1} alt="" />
+            <img src={BannerImage2} alt="" />
+            <img src={BannerImage3} alt="" />
           </div>
         </div>
-
       </section>
 
-      <div className='text-white w-11/12 mx-auto'>
+      <div className='text-white w-11/12 mx-auto mt-14'>
         {/* Section 2 */}
         <section className='pt-[100px]'>
           <div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { sidebarLinks } from '../../../data/dashboard-links'
 import { logout } from '../../../services/operations/authAPI'
 import { useDispatch, useSelector } from 'react-redux'
-import SidebarLink from './SidebarLink'
-import { VscSettingsGear } from "react-icons/vsc"
 import { VscSignOut } from 'react-icons/vsc'
-import ConfirmationModal from '../../common/ConfirmationModal'
 import { useNavigate } from 'react-router-dom'
+import { sidebarLinks } from '../../../data/dashboard-links'
+
+import SidebarLink from './SidebarLink'
+import ConfirmationModal from '../../common/ConfirmationModal'
 
 const Sidebar = () => {
     const {loading: authLoading} = useSelector(state => state.auth)
@@ -23,22 +23,19 @@ const Sidebar = () => {
           </div>
         )
     }
-
-
   return (
-    <div>
-      <div className='flex flex-col min-h-[222px] border-r-[1px] border-richblack-700
-      h-[calc(100vh-3.5rem)] bg-richblack-800 py-10'>
+    <div className='text-white'>
+      <div className='flex min-h-[calc(100vh-3.5rem)] w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10'>
 
         <div className='flex flex-col'>
             {
-                sidebarLinks.map((link) => {
-                    if(link.type && user?.accountType !== link.type) return null
+              sidebarLinks.map((link) => {
+                    if(link?.type && user.accountType !== link.type) return null
                     return (
                         <SidebarLink
-                            key={link.id}
+                            key={link?.id}
                             link={link}
-                            iconName={link.icon}
+                            iconName={link?.icon}
                         />
                     )
                 })
@@ -53,7 +50,7 @@ const Sidebar = () => {
                     name: "Settings",
                     path: "/dashboard/settings",
                 }}
-                iconName={VscSettingsGear}
+                iconName={"VscSettingsGear"}
             />
 
             <button
@@ -65,7 +62,7 @@ const Sidebar = () => {
                     btn1Handler: () => dispatch(logout(navigate)),
                     btn2Handler: () => setConfirmationModal(null),
                 })}
-                className='text-sm font-medium text-richblack-300'
+                className='px-8 py-2 text-sm font-medium text-richblack-300'
               >
 
                 <div className='flex flex-row items-center gap-x-2'>
