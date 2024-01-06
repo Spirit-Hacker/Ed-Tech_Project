@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPassword } from '../services/operations/authAPI';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -28,10 +28,11 @@ const UpdatePassword = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
     const handleOnSubmit = (e) => {
         e.preventDefault();
         const token = location.pathname.split('/').at(-1);
-        dispatch(resetPassword(password, confirmPassword, token))
+        dispatch(resetPassword(password, confirmPassword, token, navigate));
     }
   return (
     <div className='text-white flex justify-center items-center'>
@@ -53,7 +54,7 @@ const UpdatePassword = () => {
                                     value={password}
                                     onChange={handleOnChange}
                                     placeholder='Password'
-                                    className='bg-transparent w-full'
+                                    className='bg-transparent w-full outline-none'
                                 />
                                 <span className='text-richblack-300'
                                     onClick={() => setShowPassword((prev) => !prev)}>
@@ -73,7 +74,7 @@ const UpdatePassword = () => {
                                     value={confirmPassword}
                                     onChange={handleOnChange}
                                     placeholder='Confirm Password'
-                                    className='bg-transparent w-full'
+                                    className='bg-transparent w-full outline-none'
                                 />
                                 <span className='text-richblack-300'
                                     onClick={() => setShowConfirmPassword((prev) => !prev)}

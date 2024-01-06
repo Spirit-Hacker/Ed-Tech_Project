@@ -245,11 +245,11 @@ exports.changePassword = async(req, res) => {
         // get data from req body
         const userDetails = await User.findById(req.user.id);
 
-        // get oldPassword, newPassword, confirmNewPassword
-        const {oldPassword, newPassword, confirmNewPassword} = req.body;
+        // get oldPassword, newPassword
+        const {oldPassword, newPassword} = req.body;
 
         // validation
-        if(!email || !newPassword || !confirmNewPassword){
+        if(!oldPassword || !newPassword){
             return res.status(401).json({
                 success: false,
                 message: "All field are required",
@@ -267,21 +267,8 @@ exports.changePassword = async(req, res) => {
             });
         }
 
-        if(newPassword !== confirmNewPassword){
-            return res.status(400).json({
-                success: false,
-                message: "newPassword and confirmNewPassword doesn't match",
-            });
-        }
-        if(confirmNewPassword === oldPassword){
-            return res.status(402).json({
-                success: false,
-                message: "New password cannot be same as old password, please try with a different password",
-            }); 
-        }
-
         // hash password
-        const hashedPassword = await bcrypt.hash(confirmNewPassword, 10);
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         // update password in DB
         const updatedUserDetails = await User.findByIdAndUpdate(
@@ -295,6 +282,7 @@ exports.changePassword = async(req, res) => {
         // send mail - password updated
         try {
             const emailResponse = await mailSender(updatedUserDetails.email,
+                "Password Updated Successfully",
                 passwordUpdated(updatedUserDetails.email, `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`)
             );
             console.log("Email sent successfully:", emailResponse.response);
