@@ -13,7 +13,7 @@ const MyProfile = () => {
   // console.log("User about data", user?.additionalDetails?.about)
 
   return (
-    <div className='w-[90%] overflow-x-hidden'>
+    <div className='w-[100%] overflow-x-hidden'>
       <h1 className='mb-14 text-3xl font-medium text-richblack-5'>My Profile</h1>
 
       {/* Section 1 */}

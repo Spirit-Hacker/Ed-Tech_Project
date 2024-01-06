@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ramonak/react-progress-bar": "^5.2.0",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
     "concurrently": "^8.2.1",
