@@ -19,7 +19,9 @@ const EnrolledCourses = () => {
 
     useEffect(() => {
         getEnrolledCourses()
-    }, [])
+    }, 
+    // eslint-disable-next-line
+    [])
 
   return (
     <div className='text-white flex flex-col w-full'>
@@ -39,7 +41,7 @@ const EnrolledCourses = () => {
                     {/* enrolledCourses start here */}
                     {
                         enrolledCourses.map((course, index) => (
-                            <div>
+                            <div key={index}>
                                 <div>
                                     <img src={course?.thumbnail} alt='course'/>
                                     <div>
