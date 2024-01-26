@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-// import  { apiConnector } from '../../services/apiConnector'
-// import { contactusEndpoint }  from '../../services/apis';
+import  { apiConnector } from '../../services/apiConnector'
+import { contactusEndpoint }  from '../../services/apis';
 import CountryCode from '../../data/countrycode.json'
 
 const ContactForm = () => {
@@ -19,8 +19,8 @@ const ContactForm = () => {
         console.log("Logging Data: ", data);
         try {
             setLoading(true);
-            // const responce = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
-            const responce = {status: "OK"}
+            const responce = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
+            // const responce = {status: "OK"}
             console.log("Logging responce : ", responce);
             setLoading(false);   
         }

@@ -12,9 +12,10 @@ exports.createCourse = async(req, res) => {
         
         // get thumbnail
         const thumbnail = req.files.thumbnailImage;
+        console.log(thumbnail)
 
         // validation
-        if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !tag){
+        if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail){
             return res.status(400).json({
                 success: false,
                 message: "All field are mandatory",
@@ -26,6 +27,8 @@ exports.createCourse = async(req, res) => {
         }
 
         // check for instructor
+        console.log("Printing req inside create course api : ", req);
+        console.log("Printing req.user inside create course api : ", req.user);
         const userId = req.user.id;
 
         const instructorDetails = await User.findById(userId, {
@@ -192,4 +195,33 @@ exports.getCourseDetails = async(req, res) => {
             message: error.message,
         });
     }
+}
+
+// Get a list of Course for a given Instructor
+exports.getInstructorCourses = async (req, res) => {
+try {
+    // Get the instructor ID from the authenticated user or request body
+    console.log("printing request for fetch instructor courses", req.user.id);
+    const userid = req.user.id
+
+    // Find all courses belonging to the instructor
+    const instructorCourses = await Course.find({
+        instructor: userid,
+    }).sort({ createdAt: -1 })
+
+    console.log("Instructor courses:", instructorCourses)
+
+    // Return the instructor's courses
+    res.status(200).json({
+    success: true,
+    data: instructorCourses,
+    })
+} catch (error) {
+    console.error(error)
+    res.status(500).json({
+    success: false,
+    message: "Failed to retrieve instructor courses",
+    error: error.message,
+    })
+}
 }

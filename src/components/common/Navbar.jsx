@@ -24,7 +24,8 @@ const Navbar = () => {
             // setSubLinks(result.data.data);
 
             console.log(result.data)
-            setSubLinks(result.data.allCategories);
+            setSubLinks(result.data.data);
+
         }
         catch (error) {
             console.log("Could not fetch the category list")
@@ -76,7 +77,7 @@ const Navbar = () => {
                                                     </div>
 
                                                     {
-                                                        subLinks.length ? (
+                                                        subLinks.length > 0 ? (
                                                             subLinks.map( (subLink, index) => (
                                                                 <Link to={`/${subLink.name.split(' ').join('').toLowerCase()}`} key={index}>
                                                                     <div>{subLink.name}</div>
