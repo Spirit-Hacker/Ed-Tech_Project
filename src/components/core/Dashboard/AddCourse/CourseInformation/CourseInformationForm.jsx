@@ -45,7 +45,7 @@ const CourseInformationForm = () => {
             setValue("courseTags", course.tag)
             setValue("courseBenefits", course.whatYouWillLearn)
             setValue("courseCategory", course.category)
-            setValue("courseRequirements", course.instruction)
+            setValue("courseRequirements", course.instructions)
             setValue("courseImage", course.thumbnail)
         }
         
@@ -58,10 +58,10 @@ const CourseInformationForm = () => {
         if(currentValues.courseTitle !== course.courseName
             || currentValues.courseShortDesc !== course.courseDescription
             || currentValues.coursePrice !== course.price
-            // || currentValues.courseTags !== course.tag
+            || currentValues.courseTags !== course.tag
             || currentValues.courseBenefits !== course.whatYouWillLearn
             || currentValues.courseCategory !== course.category
-            || currentValues.courseRequirements.toString() !== course.instruction.toString()
+            || currentValues.courseRequirements.toString() !== course.instructions.toString()
             || currentValues.courseImage !== course.thumbnail
         ){
             return true
@@ -95,8 +95,8 @@ const CourseInformationForm = () => {
                 if(currentValues.courseCategory._id !== course.category._id){
                     formData.append("category", data.courseCategory)
                 }
-                if(currentValues.courseRequirements.toString() !== course.instruction.toString()){
-                    formData.append("instruction", JSON.stringify(data.courseRequirements))
+                if(currentValues.courseRequirements.toString() !== course.instructions.toString()){
+                    formData.append("instructions", JSON.stringify(data.courseRequirements))
                 }
                 if(currentValues.courseImage !== course.thumbnail){
                     formData.append("thumbnail", data.courseImage)
@@ -261,6 +261,7 @@ const CourseInformationForm = () => {
         {/* Requirement Field */}
         <RequirementField
             name="courseRequirements"
+            id="courseRequirements"
             label="Requirements/Instructions"
             register={register}
             setValue={setValue}
