@@ -110,7 +110,7 @@ exports.updateSubsection = async(req, res) => {
 exports.deleteSubsection = async(req, res) => {
     try {
         // get data - assume we send id in params
-        const {subSectionId} = req.body;
+        const {subSectionId, sectionId} = req.body;
 
         // delete sub section
         await Subsection.findByIdAndDelete(subSectionId);

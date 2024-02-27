@@ -12,11 +12,11 @@ import NestedView from './NestedView';
 
 const CourseBuilderForm = () => {
   
-  const [editSectionName, setEditSectionName] = useState(true)
+  const [editSectionName, setEditSectionName] = useState(null)
   const { course } = useSelector((state) => state.course)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const token = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth)
 
   const {
     register, 
@@ -130,11 +130,11 @@ const CourseBuilderForm = () => {
         </div>
       </form>
 
-      {course.courseContent.length > 0 && (
+      {course?.courseContent.length > 0 && (
         <NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>
       )}
 
-      <div className='flex justify-end w-full gap-x-4'>
+      <div className='flex justify-end w-full gap-x-4 mt-10'>
         <button
           onClick={goBack}
           className='rounded-md cursor-pointer flex items-center gap-x-3 bg-richblack-700 px-5'

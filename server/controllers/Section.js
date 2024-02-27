@@ -36,7 +36,7 @@ exports.createSection = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: "Section created succesfully",
-            updatedCourseDetails,
+            data: updatedCourseDetails,
         });
     }
     catch (error) {
@@ -51,7 +51,7 @@ exports.createSection = async(req, res) => {
 exports.updateSection = async(req, res) => {
     try {
         // data input
-        const {sectionName, sectionId} = req.body;
+        const {sectionName, sectionId, courseId} = req.body;
         // data validation
         if(!sectionName || !sectionId){
             return res.status(400).json({
@@ -59,18 +59,28 @@ exports.updateSection = async(req, res) => {
                 Message: "Missing Properties",
             });
         }
+
         // update data
         const section = await Section.findByIdAndUpdate(
                                 sectionId,
-                                {sectionName},
+                                {sectionName: sectionName},
                                 {new: true},
         );
+
+        const updatedCourseDetails = await Course.findById(courseId)
+        .populate({
+            path: "courseContent",
+            populate: {
+                path: "subSection"
+            }
+        }).exec()
+
 
         // return responce
         return res.status(200).json({
             success: true,
             message: "Section updated successfully",
-            section,
+            data: updatedCourseDetails,
         });
     }
     catch(error) {
@@ -85,7 +95,7 @@ exports.updateSection = async(req, res) => {
 exports.deleteSection = async(req, res) => {
     try {
         // get id - assuming we are sending ID in params
-        const {sectionId} = req.body;
+        const {sectionId, courseId} = req.body;
 
         // use findByIdAndDelete
         await Section.findByIdAndDelete(sectionId);
