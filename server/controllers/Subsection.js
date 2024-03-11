@@ -46,7 +46,7 @@ exports.createSubsection = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: "Sub-section created successfully",
-            updatedSection,
+            data: updatedSection,
         });
     }
     catch (error) {
@@ -94,7 +94,7 @@ exports.updateSubsection = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: "Sub-Section updated successfully",
-            updatedSubSection,
+            data: updatedSubSection,
         });
     }
     catch (error) {

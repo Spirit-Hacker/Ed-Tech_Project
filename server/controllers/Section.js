@@ -1,5 +1,6 @@
 const Section = require("../models/Section");
 const Course = require("../models/Course");
+const SubSection = require("../models/SubSection");
 
 exports.createSection = async(req, res) => {
     try {
@@ -94,17 +95,46 @@ exports.updateSection = async(req, res) => {
 
 exports.deleteSection = async(req, res) => {
     try {
-        // get id - assuming we are sending ID in params
+        // get id - assuming we are sending ID in body
         const {sectionId, courseId} = req.body;
 
+        if(!sectionId || !courseId){
+            return res.status(400).json({
+                success: false,
+                message: "sectionId or courseId missing"
+            })
+        }
+
+        // TODO [Testing] : do we need to delete this from course schema - YES
+        // delete section from course
+        await Course.findByIdAndUpdate(courseId,
+            {
+                $pull:{
+                    courseContent: sectionId
+                }
+            }
+        )
+        // delete all associated sub section
+        const section = await Section.findById(sectionId)
+        await SubSection.deleteMany({_id: {$in: section?.subSection}})
+
         // use findByIdAndDelete
-        await Section.findByIdAndDelete(sectionId);
-        // TODO [Testing] : do we need to delete this from course schema ??
+        await Section.findByIdAndDelete(sectionId)
+
+        // updated course
+        const updatedCourse = await Course.findById(courseId)
+            .populate({
+                path: "courseContent",
+                populate:{
+                    path: "subSection"
+                }
+            }).exec()
 
         // return responce
         return res.status(200).json({
             success: true,
             message: "Section deleted successfully",
+            data: updatedCourse
         });
     }
     catch(error) {

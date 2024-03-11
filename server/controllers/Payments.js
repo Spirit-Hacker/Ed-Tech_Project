@@ -182,3 +182,27 @@ exports.verifySignature = async(req, res) => {
         });
     }
 };
+
+// // mongoose aggregation pipeline
+// const { MongoClient } = require('mongodb');
+
+// async function runAggregationPipeline() {
+// const uri = 'mongodb://localhost:4000';
+// const client = new MongoClient(uri);
+
+// try {
+// await client.connect();
+
+// const pipeline = [
+//     { $match: { age: { $gte: 18 } } },
+//     { $group: { _id: '$gender', count: { $sum: 1 } } },
+// ];
+
+// const result = await client.db('mydatabase').collection('mycollection').aggregate(pipeline).toArray();
+// console.log(result);
+// } finally {
+// await client.close();
+// }
+// }
+
+// runAggregationPipeline().catch(console.error);
