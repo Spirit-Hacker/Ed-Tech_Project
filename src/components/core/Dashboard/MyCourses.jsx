@@ -8,6 +8,7 @@ import IconBtn from "../../common/IconBtn"
 import CoursesTable from "./InstructorCourses/CourseTable"
 
 export default function MyCourses() {
+  
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const [courses, setCourses] = useState([])

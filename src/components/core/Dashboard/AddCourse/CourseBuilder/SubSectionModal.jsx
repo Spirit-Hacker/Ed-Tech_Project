@@ -147,13 +147,13 @@ const SubSectionModal = ({
             editData={edit ? modalData.videoUrl : null}
           />
           <div>
-            <label>Lecture Title</label>
+            <label className='lable-style'>Lecture Title</label>
             <input 
               type="text"
               {...register("lectureTitle", { required: true })}
               placeholder="Enter Lecture Title"
               id="lectureTitle"
-              className='w-full'
+              className='w-full form-style'
             />
             {
               errors.lectureTitle && (
@@ -165,12 +165,12 @@ const SubSectionModal = ({
           </div>
 
           <div>
-            <label>Lecture Description</label>
+            <label className='lable-style'>Lecture Description</label>
             <textarea
               id="lectureDesc"
               placeholder='Enter Lecture Description'
               {...register("lectureDesc", { required: true })}
-              className='w-full min-h-[130px]'
+              className='w-full min-h-[130px] form-style'
             />
             {
               errors.lectureDesc && (
