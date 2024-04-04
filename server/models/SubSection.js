@@ -7,7 +7,7 @@ const subSectionSchema = new mongoose.Schema({
     timeDuration: {
         type: String,
     },
-    decription: {
+    description: {
         type: String,
     },
     videoUrl: {

@@ -1,19 +1,24 @@
 const Subsection = require("../models/SubSection");
 const Section = require("../models/Section");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const SubSection = require("../models/SubSection");
 require("dotenv").config();
 
 // create Subsection
 exports.createSubsection = async(req, res) => {
     try {
         // fetch data fron req body
-        const {sectionId, title, timeDuration, description} = req.body;
-
+        const {sectionId, title, description} = req.body;
+        console.log("Request Body of sub section create : ", req.body);
+        
         // extract file/video
-        const video = req.files.videoFile;
+        const video = req.files.videoUrl;
+        console.log("Request Files: ", req.files);
+
+        console.log(`Title : ${title}, description : ${description}, video : ${video}`);
 
         // validation
-        if(!sectionId || !title || !timeDuration || !description || !video){
+        if(!sectionId || !title || !description || !video){
             return res.status(401).json({
                 success: false,
                 message: "All fiels are required",
@@ -26,7 +31,7 @@ exports.createSubsection = async(req, res) => {
         // create a subsection
         const subSectionDetails = await Subsection.create({
             title: title,
-            timeDuration: timeDuration,
+            timeDuration: uploadDetails.duration,
             description: description,
             videoUrl: uploadDetails.secure_url,
         });
@@ -62,39 +67,42 @@ exports.createSubsection = async(req, res) => {
 exports.updateSubsection = async(req, res) => {
     try {
         // get input
-        const {subSectionId, title, timeDuration, description} = req.body;
+        const {sectionId, subSectionId, title, description} = req.body;
 
-        // extract file/video
-        const newVideo = req.files.videoFile;
+        console.log("inside subsection controller");
+        console.log(`Title: ${title}, Description: ${description}, Request Body: ${req.body}`);
 
-        // data validation
-        if(!subSectionId || !title || !timeDuration || !description || !newVideo){
+        // validation
+        if(!title || !description){
             return res.status(401).json({
                 success: false,
-                message: "Missing properties",
-            });
+                message: "All fiels are required",
+            })
         }
 
-        // upload new video to cloudinary
-        const newUploadDetails = await uploadImageToCloudinary(newVideo, process.env.FOLDER_NAME);
+        // extract file/video
+        const video = req.files.videoUrl;
+
+        const uploadDetails = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
+
+        await Subsection.findByIdAndUpdate(
+            {_id: subSectionId},
+            {
+                title: title,
+                timeDuration: uploadDetails.duration,
+                description: description,
+                videoUrl: uploadDetails.secure_url,
+            }
+        )
 
         // update data
-        const updatedSubSection = await Subsection.findByIdAndUpdate(
-                                    {_id: subSectionId},
-                                    {
-                                        title,
-                                        timeDuration,
-                                        description,
-                                        videoUrl: newUploadDetails.secure_url,
-                                    },
-                                    {new: true},
-        );
+        const updatedSection = await Section.findById(sectionId).populate("subSection");
 
         // return responce
         return res.status(200).json({
             success: true,
             message: "Sub-Section updated successfully",
-            data: updatedSubSection,
+            data: updatedSection,
         });
     }
     catch (error) {
@@ -109,17 +117,30 @@ exports.updateSubsection = async(req, res) => {
 // HW: deleteSubsection
 exports.deleteSubsection = async(req, res) => {
     try {
-        // get data - assume we send id in params
         const {subSectionId, sectionId} = req.body;
+
+        // TODO [Testing] : do we need to delete this from section schema ? ans - YES
+        // delete subsection from section schema
+        await Section.findByIdAndUpdate(
+            {_id: sectionId},
+            {
+                $pull: {
+                    subSection: subSectionId
+                }
+            }
+        )
 
         // delete sub section
         await Subsection.findByIdAndDelete(subSectionId);
-        // TODO [Testing] : do we need to delete this from section schema ??
+
+        const updatedSection = await Section.findById(sectionId)
+                .populate("subSection");
 
         // return responce
         return res.status(200).json({
             success: true,
             message: "sub-section deleted successfully",
+            data: updatedSection,
         });
     }
     catch (error) {

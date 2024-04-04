@@ -38,7 +38,11 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const handleDeleteSubsection = async(subSectionId, sectionId) => {
       const result = await deleteSubSection({subSectionId, sectionId, token});
       if(result){
-        dispatch(setCourse(result));
+        const updatedCourseContent = course.courseContent.map((section) => {
+          return section._id === sectionId ? result : section
+        })
+        const updatedCourse = {...course, courseContent: updatedCourseContent}
+        dispatch(setCourse(updatedCourse));
       }
       setConfirmationModal(null);
     }
@@ -85,7 +89,10 @@ const NestedView = ({handleChangeEditSectionName}) => {
                 section?.subSection.map((data) => (
                   <div 
                     key={data._id}
-                    onClick={() => setViewSubsection(data)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setViewSubsection(data)
+                    }}
                     className='flex items-center justify-between gap-x-3 border-b-2'
                   >
                     <div className='flex items-center gap-x-3'>
@@ -96,20 +103,26 @@ const NestedView = ({handleChangeEditSectionName}) => {
                     <div className='flex items-center gap-x-3'>
                       <button
                         className=''
-                        onClick={() => setEditSubsection({...data, sectionId: section._id})}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setEditSubsection({...data, sectionId: section._id})
+                        }}
                       >
                         <MdModeEditOutline/>
                       </button>
 
                       <button
-                        onClick={setConfirmationModal({
-                          text1: "Delete this sub section",
-                          text2: "Current lecture will be deleted",
-                          btn1Text: "Delete",
-                          btn2Text: "Cancel",
-                          btn1Handler: () => handleDeleteSubsection(data._id, section._id),
-                          btn2Handler: () => setConfirmationModal(null)
-                        })}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setConfirmationModal({
+                            text1: "Delete this section",
+                            text2: "All the lectures in this section will be deleted",
+                            btn1Text: "Delete",
+                            btn2Text: "Cancel",
+                            btn1Handler: () => handleDeleteSubsection(data._id, section._id),
+                            btn2Handler: () => setConfirmationModal(null)
+                          })
+                        }}
                       >
                         <RiDeleteBin6Line/>
                       </button>

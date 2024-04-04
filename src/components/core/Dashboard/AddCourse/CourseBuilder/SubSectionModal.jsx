@@ -53,6 +53,7 @@ const SubSectionModal = ({
 
     const handleEditSubSection = async() => {
       const currentValues = getValues()
+      console.log("Form Values in edit sub section", currentValues)
       const formData = new FormData()
 
       formData.append("sectionId", modalData.sectionId)
@@ -64,9 +65,8 @@ const SubSectionModal = ({
       if(currentValues.lectureDesc !== modalData.description){
         formData.append("description", currentValues.lectureDesc)
       }
-      if(currentValues.lectureVideo !== modalData.videoUrl){
-        formData.append("videoUrl", currentValues.lectureVideo)
-      }
+      formData.append("videoUrl", currentValues.lectureVideo)
+      
 
       setLoading(true)
 
@@ -74,8 +74,11 @@ const SubSectionModal = ({
       const result = await updateSubSection(formData, token)
 
       if(result){
-        // check for updations
-        dispatch(setCourse(result))
+        const updatedCourseContent = course.courseContent.map((section) => {
+          return section._id === modalData.sectionId ? result : section
+        })
+        const updatedCourse = {...course, courseContent: updatedCourseContent}
+        dispatch(setCourse(updatedCourse))
       }
 
       setModalData(null)
@@ -109,8 +112,11 @@ const SubSectionModal = ({
       const result = await createSubSection(formData, token)
 
       if(result){
-        // check for updations
-        dispatch(setCourse(result))
+        const updatedCourseContent = course.courseContent.map((section) => {
+          return section._id === modalData ? result : section
+        })
+        const updatedCourse = {...course, courseContent: updatedCourseContent}
+        dispatch(setCourse(updatedCourse))
       }
 
       setModalData(null)
