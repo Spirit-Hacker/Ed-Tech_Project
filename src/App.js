@@ -22,6 +22,7 @@ import { ACCOUNT_TYPE } from "./utils/constants";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import { useSelector } from "react-redux";
 import AddCourse from "./components/core/Dashboard/AddCourse";
+import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
 
 function App() {
 
@@ -113,6 +114,10 @@ function App() {
                 <Route
                   path="/dashboard/add-course"
                   element={<AddCourse/>}
+                />
+                <Route
+                  path="/dashboard/edit-course/:courseId"
+                  element={<EditCourse/>}
                 />
               </>
             )

@@ -319,7 +319,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
         courseId,
       },
       {
-        Authorization: `Bearer ${token}`,
+        Authorisation: `Bearer ${token}`,
       }
     )
     console.log("COURSE_FULL_DETAILS_API API RESPONSE............", response)

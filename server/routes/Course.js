@@ -49,6 +49,8 @@ router.get("/getAllCourses", auth, showAllCourses)
 router.post("/getCourseDetails", auth, getCourseDetails)
 // Get all Courses of an Instructor
 router.get("/getInstructorCourses", auth, getInstructorCourses)
+// get /course/getFullCourseDetails
+router.post("/getFullCourseDetails", getCourseDetails)
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

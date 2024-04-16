@@ -243,7 +243,7 @@ exports.getCourseDetails = async(req, res) => {
                 }
             }
         )
-        .exec();
+        // .exec();
         
         // validation
         if(!courseDetails){
@@ -252,10 +252,12 @@ exports.getCourseDetails = async(req, res) => {
                 message: `could not find course with ${courseId}`,
             });
         }
-
+        
+        console.log("GET COURSE DETALS API", courseDetails)
+        console.log("GET COURSE DETALS API", courseDetails[0].courseContent)
         // total course duration
-        const totalTimeDuration = 0;
-        courseDetails.courseContent.forEach((section) => {
+        let totalTimeDuration = 0;
+        courseDetails[0].courseContent.forEach((section) => {
             section.subSection.forEach((subSection) => {
                 let timeDurationInSeconds = parseInt(subSection.timeDuration)
                 totalTimeDuration += timeDurationInSeconds
