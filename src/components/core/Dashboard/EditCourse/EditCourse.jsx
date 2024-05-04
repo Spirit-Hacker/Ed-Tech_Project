@@ -1,7 +1,7 @@
 import {React, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { getAllCourses, getFullDetailsOfCourse } from '../../../../services/operations/courseDetailsAPI';
+import { getFullDetailsOfCourse } from '../../../../services/operations/courseDetailsAPI';
 import { setCourse, setEditCourse } from '../../../../slice/courseSlice';
 import RenderSteps from '../AddCourse/RenderSteps';
 
@@ -26,6 +26,8 @@ const EditCourse = () => {
         }
 
         populateCourseDetails();
+
+        // eslint-disable-next-line
     }, []);
 
     if(loading){
