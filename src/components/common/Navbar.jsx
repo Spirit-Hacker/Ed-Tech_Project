@@ -58,7 +58,7 @@ const Navbar = () => {
                             (
                                 <li key={index}>
                                     {
-                                        element.title === "Catalog"
+                                        element.title === "Category"
                                         ? (
                                             <div className='relative flex flex-row justify-center items-center cursor-pointer
                                                 gap-2 group'>
