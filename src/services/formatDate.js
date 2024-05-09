@@ -2,7 +2,7 @@ export const formateDate = (dateString) => {
     const options = {
         year: "numeric",
         month: "long",
-        day: "numsric"
+        day: "numeric"
     };
     const date = new Date(dateString);
     const formatedDate = date.toLocaleDateString("US-en", options);

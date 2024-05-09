@@ -62,8 +62,13 @@ exports.categoryPageDetails = async(req, res) => {
         const {categoryId} = req.body;
 
         // get courses for specified category id
-        const selectedCategory = await Category.findById(categoryId)
-                                        .populate("courses")
+        const selectedCategory = await Category.findById({_id: categoryId})
+                                        .populate({
+                                            path: 'course',
+                                            match: {status: "Published"},
+                                            populate: "ratingAndReviews",
+                                            populate: "instructor"
+                                        })
                                         .exec();
 
         // validation
@@ -75,15 +80,18 @@ exports.categoryPageDetails = async(req, res) => {
         }
 
         // get courses for different categories
-        const differentCategories = await Category.findById(
+        const differentCategories = await Category.find(
                                     {
                                         _id: {
                                             $ne: categoryId,
                                         },
                                     },
-        )
-        .populate("courses")
-        .exec()
+        ).populate({
+            path: 'course',
+            populate: "ratingAndReviews",
+            populate: "instructor"
+        })
+        .exec();
 
         if(!differentCategories){
             return res.status(404).json({
@@ -92,9 +100,12 @@ exports.categoryPageDetails = async(req, res) => {
             })
         }
 
-        const allCategories = await Category.find({})
-        .populate("course")
-        .exec()
+        const allCategories = await Category.find()
+        .populate({
+            path: "course",
+            populate: "ratingAndReviews",
+            populate: "instructor"
+        }).exec();
 
         const allCourses = allCategories.flatMap( (category) => category.course )
         const topSellingCourse = allCourses.sort( (a, b) => a.sold - b.sold).slice(0, 10)

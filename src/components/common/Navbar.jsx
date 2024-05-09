@@ -21,7 +21,6 @@ const Navbar = () => {
         try {
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing sublinks result", result);
-            // setSubLinks(result.data.data);
 
             console.log(result.data)
             setSubLinks(result.data.data);
@@ -79,7 +78,7 @@ const Navbar = () => {
                                                     {
                                                         subLinks.length > 0 ? (
                                                             subLinks.map( (subLink, index) => (
-                                                                <Link to={`/${subLink.name.split(' ').join('').toLowerCase()}`} key={index}>
+                                                                <Link to={`/catalog/${subLink.name.split(' ').join('').toLowerCase()}`} key={index}>
                                                                     <div>{subLink.name}</div>
                                                                 </Link>
                                                             ))
