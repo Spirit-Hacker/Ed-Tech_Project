@@ -4,25 +4,37 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Course_Card from './Course_Card';
+import { FreeMode, Pagination } from "swiper";
 
 const CourseSlider = ({courses}) => {
   return (
-    <React.Fragment>
+    <>
         {
             courses?.length > 0 ?
             (<div>
-                <Swiper>
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={25}
+                    loop={true}
+                    // modules={[FreeMode, Pagination]}
+                    breakpoints={{
+                        1024: {
+                        slidesPerView: 3,
+                        },
+                    }}
+                    className="max-h-[30rem]"
+                >
                     {
                         courses.map((course, index) => (
                             <SwiperSlide key = {index}>
-                                <Course_Card course = {course} />
+                                <Course_Card course = {course} height={"h-[250px]"}/>
                             </SwiperSlide>
                         ))
                     }
                 </Swiper>
-            </div>) : (<p>{`No Course Found`}</p>)
+            </div>) : (<p className="text-xl text-richblack-5">{`No Course Found`}</p>)
         }
-    </React.Fragment>
+    </>
   )
 }
 

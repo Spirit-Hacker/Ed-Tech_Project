@@ -12,6 +12,7 @@ const Catalog = () => {
     const { catalogName } = useParams();
     const [catalogPageData, setCatalogPageData] = useState(null);
     const [categoryId, setCategoryId] = useState("");
+    const [active, setActive] = useState(1);
 
     // Fetch all categories
     useEffect(() => {
@@ -47,21 +48,35 @@ const Catalog = () => {
     }, [categoryId]);
 
   return (
-    <div className="text-white">
+    <div className=" box-content bg-richblack-800 px-4">
         
-        <div>
-            <p>{`Home / Catalog / `}<span>{catalogPageData?.data?.selectedCategory?.name}</span></p>
-            <p>{catalogPageData?.data?.selectedCategory?.name}</p>
-            <p>{catalogPageData?.data?.selectedCategory?.description}</p>
+        <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
+            <p className="text-sm text-richblack-300">{`Home / Catalog / `}<span className="text-yellow-25">{catalogPageData?.data?.selectedCategory?.name}</span></p>
+            <p className="text-3xl text-richblack-5">{catalogPageData?.data?.selectedCategory?.name}</p>
+            <p className="max-w-[870px] text-richblack-200">{catalogPageData?.data?.selectedCategory?.description}</p>
         </div>
 
         <div>
             {/* Section 1 */}
-            <div>
-                <div>Course to get you started</div>
-                <div className="flex gap-x-3">
-                    <p>Most Popular</p>
-                    <p>New</p>
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                <div className="section_heading text-white">Course to get you started</div>
+                <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+                    <p
+                        className={`px-4 py-2 ${
+                        active === 1
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                        } cursor-pointer`}
+                        onClick={() => setActive(1)}
+                    >Most Popular</p>
+                    <p
+                        className={`px-4 py-2 ${
+                        active === 2
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                        } cursor-pointer`}
+                        onClick={() => setActive(2)}
+                    >New</p>
                 </div>
                 <div>
                     <CourseSlider
@@ -71,9 +86,9 @@ const Catalog = () => {
             </div>
 
             {/* Section 2 */}
-            <div>
-                <p>Top Courses in {catalogPageData?.data?.selectedCategory?.name}</p>
-                <div>
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                <div className="section_heading text-white">Top Courses in {catalogPageData?.data?.selectedCategory?.name}</div>
+                <div className="py-8">
                     <CourseSlider
                         courses = {catalogPageData?.data?.differentCategories[0]?.course}
                     />
@@ -81,10 +96,10 @@ const Catalog = () => {
             </div>
 
             {/* Section 3 */}
-            <div>
-                <div>Frequently Bought</div>
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                <div className="section_heading text-white">Frequently Bought</div>
                 <div className="py-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {
                             catalogPageData?.data?.topSellingCourse?.map((course, index) => (
                                 // eslint-disable-next-line
