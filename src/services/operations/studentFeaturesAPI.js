@@ -13,18 +13,16 @@ const {
 
 const loadScript = (src) => {
     return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = src;
-
+        const script = document.createElement("script")
+        script.src = src
         script.onload = () => {
-            resolve(true);
+          resolve(true)
         }
         script.onerror = () => {
-            resolve(false);
+          resolve(false)
         }
-
-        document.body.appendChild(script);
-    });
+        document.body.appendChild(script)
+    })
 }
 
 export const buyCourse = async(courses, token, userDetails, navigate, dispatch) => {
@@ -43,6 +41,7 @@ export const buyCourse = async(courses, token, userDetails, navigate, dispatch) 
             }
         );
         console.log("ORDER RESPONSE : ", orderResponse);
+        console.log("ORDER RESPONSE USER : ", userDetails);
 
         if(!orderResponse.data.success){
             throw new Error(orderResponse.data.message);
@@ -69,8 +68,8 @@ export const buyCourse = async(courses, token, userDetails, navigate, dispatch) 
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
-        paymentObject.on("payment.failed", (response) => {
-            toast.error("oops, payment failed");
+        paymentObject.on("payment.failed", function (response) {
+            toast.error("Oops! Payment Failed.");
             console.log(response.error);
         });
     }

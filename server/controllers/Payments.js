@@ -43,7 +43,7 @@ exports.capturePayment = async(req, res) => {
                     });
                 }
 
-                totalAmount += course.price;
+                totalAmount += JSON.parse(course.price);
             }
             catch (error) {
                 console.log("Capture Payment : ", error);
