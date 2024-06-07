@@ -25,6 +25,7 @@ import AddCourse from "./components/core/Dashboard/AddCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
+import ViewCourse from "./pages/ViewCourse";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/catalog/:catalogName" element={<Catalog/>}/>
         <Route path="/courses/:courseId" element={<CourseDetails/>}/>
+        <Route path="/view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<ViewCourse/>}/>
 
         <Route
           path="/signup" element={

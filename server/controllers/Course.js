@@ -5,6 +5,7 @@ const {uploadImageToCloudinary} = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
+const CourseProgress = require("../models/CourseProgress");
 require("dotenv").config();
 
 // createCourse handler function
@@ -219,7 +220,8 @@ exports.editCourse = async (req, res) => {
 exports.getCourseDetails = async(req, res) => {
     try {
         // get course id
-        const {courseId} = req.body;
+        const { courseId } = req.body;
+        const { userId } = req.user.id;
 
         // find course details
         const courseDetails = await Course.find(
@@ -243,7 +245,7 @@ exports.getCourseDetails = async(req, res) => {
                 }
             }
         )
-        // .exec();
+        .exec();
         
         // validation
         if(!courseDetails){
@@ -255,6 +257,16 @@ exports.getCourseDetails = async(req, res) => {
         
         console.log("GET COURSE DETALS API", courseDetails)
         console.log("GET COURSE DETALS API", courseDetails[0].courseContent)
+
+        const courseProgessCount = await CourseProgress.findOne(
+          {
+            courseId,
+            userId
+          }
+        );
+
+        console.log("course progress : ", courseProgessCount);
+
         // total course duration
         let totalTimeDuration = 0;
         courseDetails[0].courseContent.forEach((section) => {
@@ -272,7 +284,8 @@ exports.getCourseDetails = async(req, res) => {
             message: "Course details fetched successfully",
             data: {
                 courseDetails,
-                totalDuration
+                totalDuration,
+                completedVideos: courseProgessCount?.completedVideos ? courseProgessCount?.completedVideos : []
             }
         });
     }
