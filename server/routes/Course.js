@@ -18,6 +18,9 @@ const {createSubsection, updateSubsection, deleteSubsection} = require("../contr
 // Rating and review controllers
 const {createRating, getAverageRating, getAllRating} = require("../controllers/RatingAndReviews");
 
+// Course Progress controllers
+const { updateCourseProgress } = require("../controllers/CourseProgress");
+
 // import middlewares
 const {auth, isAdmin, isInstructor, isStudent} = require("../middlewares/auth");
 
@@ -46,11 +49,13 @@ router.post("/addSubSection", auth, isInstructor, createSubsection)
 // Get all Registered Courses
 router.get("/getAllCourses", auth, showAllCourses)
 // Get Details for a Specific Courses
-router.post("/getCourseDetails", getCourseDetails)
+router.post("/getCourseDetails", auth, getCourseDetails)
 // Get all Courses of an Instructor
 router.get("/getInstructorCourses", auth, getInstructorCourses)
 // get /course/getFullCourseDetails
 router.post("/getFullCourseDetails", auth, getCourseDetails)
+
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

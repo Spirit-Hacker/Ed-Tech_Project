@@ -6,6 +6,7 @@ const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail
 const { default: mongoose } = require("mongoose");
 const { paymentSuccessEmail } = require("../mail/templates/paymentSuccessEmail");
 const crypto = require("crypto");
+const CourseProgress = require("../models/CourseProgress");
 
 require("dotenv").config();
 
@@ -138,9 +139,15 @@ exports.verifyPayment = async(req, res) => {
                         });
                     }
 
+                    const courseProgress = await CourseProgress.create({
+                        courseId: course_id,
+                        userId: userId,
+                        completedVideos: []
+                    });
+
                     const updatedUser = await User.findByIdAndUpdate(userId, 
                         {
-                            $push: {courses: course_id}
+                            $push: {courses: course_id, courseProgress: courseProgress._id}
                         },
                         {new: true}
                     );

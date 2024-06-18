@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { buyCourse } from '../services/operations/studentFeaturesAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
+import { fetchCourseDetails, getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
 import getAverageRating from '../utils/getAvgRating';
 import Error from './Error';
 import ConfirmationModal from '../components/common/ConfirmationModal';
@@ -28,7 +28,7 @@ const CourseDetails = () => {
     useEffect(() => {
         const getFullCourseDetails = async() => {
             try {
-                const result = await fetchCourseDetails(courseId);
+                const result = await getFullDetailsOfCourse(courseId, token);
                 setCourseData(result);
                 console.log("CourseDetails : ", result);
             }
@@ -88,13 +88,13 @@ const CourseDetails = () => {
         )
     }
 
-    if(!courseData.success){
-        return (
-            <div>
-                <Error/>
-            </div>
-        )
-    }
+    // if(!courseData.success){
+    //     return (
+    //         <div>
+    //             <Error/>
+    //         </div>
+    //     )
+    // }
 
     const {
         _id,
@@ -108,7 +108,7 @@ const CourseDetails = () => {
         instructor,
         studentsEnrolled,
         createdAt
-    } = courseData?.data?.courseDetails[0];
+    } = courseData?.courseDetails[0];
 
   return (
     <>
@@ -168,7 +168,7 @@ const CourseDetails = () => {
         {/* Courses Card */}
         <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block">
           <CourseDetailsCard
-            course={courseData?.data?.courseDetails[0]}
+            course={courseData?.courseDetails[0]}
             setConfirmationModal={setConfirmationModal}
             handleBuyCourse={handleCourseBuy}
           />

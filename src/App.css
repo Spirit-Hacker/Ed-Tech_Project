@@ -89,6 +89,9 @@ details > summary::-webkit-details-marker {
   background-image: url("./assets/Images/bghome.svg");
 }
 
+.blackButton {
+  @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] text-richblack-5 font-semibold
+}
 .form-style {
   @apply rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
 }
