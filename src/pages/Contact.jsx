@@ -3,8 +3,8 @@ import { IoChatbubblesSharp } from "react-icons/io5";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import ContactForm from '../components/ContactPage/ContactForm';
-import ReviewSlider from '../components/core/AboutPage/ReviewSlider';
 import Footer from '../components/common/Footer';
+import ReviewSlider from '../components/common/ReviewSlider';
 
 const Contact = () => {
   return (
