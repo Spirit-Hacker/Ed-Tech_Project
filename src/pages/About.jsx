@@ -99,10 +99,13 @@ const About = () => {
         <ContactFormSection/>
       </section>
 
-      <section className='mx-auto w-11/12 flex items-center justify-center mb-20'>
-        <div>
-          Reviews from other learners
-          <ReviewSlider/>
+      <section className='mx-auto w-11/12 flex items-center justify-center'>
+        <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+          {/* Reviws from Other Learner */}
+          <h1 className="text-center text-4xl font-semibold mt-8">
+            Reviews from other learners
+          </h1>
+          <ReviewSlider />
         </div>
       </section>
 

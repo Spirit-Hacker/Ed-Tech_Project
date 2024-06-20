@@ -170,7 +170,7 @@ const CourseDetails = () => {
           <CourseDetailsCard
             course={courseData?.courseDetails[0]}
             setConfirmationModal={setConfirmationModal}
-            handleBuyCourse={handleCourseBuy}
+            handleCourseBuy={handleCourseBuy}
           />
         </div>
       </div>

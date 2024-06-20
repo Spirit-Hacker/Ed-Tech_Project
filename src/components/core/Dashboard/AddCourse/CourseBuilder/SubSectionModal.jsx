@@ -124,18 +124,18 @@ const SubSectionModal = ({
     }
 
   return (
-    <div>
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
 
-      <div>
+      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
 
-        <div>
-          <p>{view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture</p>
+        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
+          <p className="text-xl font-semibold text-richblack-5">{view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture</p>
           <button onClick={() => (!loading ? setModalData(null) : null)}>
-            <RxCross1/>
+            <RxCross1 className="text-2xl text-richblack-5"/>
           </button>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-8 py-10">
           <Upload
             register={register}
             name={"lectureVideo"}

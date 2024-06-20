@@ -125,7 +125,7 @@ const VideoDetails = () => {
     }
 
   return (
-    <div className="text-richblack-5">
+    <div className="flex flex-col gap-5 text-white">
       {
         !videoData 
         ? (<div>No Data Found</div>)
@@ -137,16 +137,22 @@ const VideoDetails = () => {
               onEnded={() => setVideoEnded(true)}
               src={videoMp4}
             >
-              <AiFillPlayCircle/>
+              <AiFillPlayCircle position="center"/>
               {
                 videoEnded && (
-                  <div>
+                  <div style={{
+                          backgroundImage:
+                            "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+                        }}
+                        className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+                  >
                     {
                       !completedLectures.includes(subSectionId) && (
                         <IconBtn
                           disabled={loading}
                           onClick={() => handleLectureCompletion()}
                           text={!loading ? "Mark as completed" : "Loading..."}
+                          customClasses="text-xl max-w-max px-4 mx-auto"
                         />
                       )
                     }
@@ -160,9 +166,10 @@ const VideoDetails = () => {
                           setVideoEnded(false);
                         }
                       }}
+                      customClasses="text-xl max-w-max px-4 mx-auto mt-2"
                     />
 
-                    <div>
+                    <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
                       {
                         !isFirstVideo() && (
                           <button
@@ -195,10 +202,10 @@ const VideoDetails = () => {
         )
       }
       
-      <h1>
+      <h1 className="mt-4 text-3xl font-semibold">
         {videoData.title}
       </h1>
-      <p>
+      <p className="pt-2 pb-6">
         {videoData.description}
       </p>
     </div>

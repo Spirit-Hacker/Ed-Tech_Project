@@ -5,6 +5,7 @@ import ReactStars from "react-rating-stars-component";
 import IconBtn from "../../common/IconBtn";
 import { createRating } from "../../../services/operations/courseDetailsAPI";
 import { useParams } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
 
 const CourseReviewModal = ({setReviewModal}) => {
 
@@ -44,34 +45,34 @@ const CourseReviewModal = ({setReviewModal}) => {
     }
 
   return (
-    <div className="text-richblack-5">
-      <div>
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
+      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
         {/* Modal Header */}
-        <div>
-          <p>Add Review</p>
-          <button onClick={() => setReviewModal(false)}>
-            Close
+        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
+          <p className="text-xl font-semibold text-richblack-5">Add Review</p>
+          <button className="text-2xl text-richblack-5" onClick={() => setReviewModal(false)}>
+            <RxCross2 className="text-2xl text-richblack-5"/>
           </button>
         </div>
 
         {/* Modal Body */}
-        <div>
+        <div className="p-6">
           
-          <div>
+          <div className="flex items-center justify-center gap-x-4">
             <img
               src={user.image}
               alt="user image"
-              className="aspect-square w-[50px] object-cover rounded-full"
+              className="aspect-square w-[50px] rounded-full object-cover"
             />
 
             <div>
-              <p>{`${user.firstName} ${user.lastName}`}</p>
-              <p>Posting Publicly</p>
+              <p className="font-semibold text-richblack-5">{`${user.firstName} ${user.lastName}`}</p>
+              <p className="text-sm text-richblack-5">Posting Publicly</p>
             </div>
 
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col items-center mt-6"
+              className="mt-6 flex flex-col items-center"
             >
 
               <ReactStars
@@ -81,9 +82,9 @@ const CourseReviewModal = ({setReviewModal}) => {
                 onChange={ratingChanged}
               />
 
-              <div className="flex flex-col gap-y-2 items-center">
+              <div  className="flex w-11/12 flex-col space-y-2">
 
-                <label htmlFor="courseExperience" className="lable-style">
+                <label htmlFor="courseExperience" className="text-sm text-richblack-5">
                   Add Your Experience <span className="text-pink-100">*</span>
                 </label>
 
@@ -91,21 +92,21 @@ const CourseReviewModal = ({setReviewModal}) => {
                   id="courseExperience"
                   placeholder="Add Your Experience here"
                   {...register("courseExperience", {required: true})}
-                  className="form-style w-full min-h-[130px]"
+                  className="form-style resize-x-none min-h-[130px] w-full"
                 />
 
                 {
                   errors.courseExperience && (
-                    <span>Please add your experience</span>
+                    <span className="ml-2 text-xs tracking-wide text-pink-200">Please add your experience</span>
                   )
                 }
               </div>
               
               {/* Save and Cancel button */}
-              <div className="flex gap-x-4 items-center justify-center pt-4">
+              <div className="mt-6 flex w-11/12 justify-end gap-x-2">
                 <button 
                   onClick={() => setReviewModal(false)}
-                  className="bg-richblack-700 px-4 py-2 rounded-md"
+                  className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
                 >
                   Cancel
                 </button>
