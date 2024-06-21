@@ -14,6 +14,7 @@ const ViewCourse = () => {
     const dispatch = useDispatch();
 
     // console.log("Whats in the useParams hook : ", useParams());
+    console.log("Printing token in view course : ", token);
 
     useEffect(() => {
         const setCourseDetails = async() => {
@@ -29,6 +30,11 @@ const ViewCourse = () => {
             });
 
             dispatch(setTotalNoOfLectures(lectures));
+
+            localStorage.setItem("courseSectionData", JSON.stringify(courseData?.courseDetails[0]?.courseContent));
+            localStorage.setItem("entireCourseData", JSON.stringify(courseData?.courseDetails[0]));
+            localStorage.setItem("completedLectures", JSON.stringify(courseData?.completedVideos));
+            localStorage.setItem("totalNoOfLectures", JSON.stringify(lectures));
         }
 
         setCourseDetails();

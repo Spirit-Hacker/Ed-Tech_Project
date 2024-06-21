@@ -222,7 +222,7 @@ exports.getCourseDetails = async(req, res) => {
     try {
         // get course id
         const { courseId } = req.body;
-        const { userId } = req.user.id;
+        const userId = req.user.id;
 
         // find course details
         const courseDetails = await Course.find(
@@ -259,12 +259,13 @@ exports.getCourseDetails = async(req, res) => {
         console.log("GET COURSE DETALS API", courseDetails)
         console.log("GET COURSE DETALS API", courseDetails[0].courseContent)
 
-        const courseProgessCount = await CourseProgress.findOne(
-          {
-            courseId,
-            userId
-          }
-        );
+        console.log("COURSE ID: ", courseId);
+        console.log("USER ID: ", userId);
+
+        const courseProgessCount = await CourseProgress.findOne({
+          courseId: courseId,
+          userId: userId
+        });
 
         console.log("course progress : ", courseProgessCount);
 

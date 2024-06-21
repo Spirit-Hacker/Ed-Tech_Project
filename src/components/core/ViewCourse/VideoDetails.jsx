@@ -22,6 +22,8 @@ const VideoDetails = () => {
     const [loading, setLoading] = useState(false);
     const location = useLocation();
 
+    console.log("LOCAL STORAGE: ", courseSectionData, courseEntireData, completedLectures);
+
     // video comes in a .mov format so we use following state to store the .mp4 format and use in the Player Component
     const [videoMp4, setVideoMp4] = useState(null);
 
