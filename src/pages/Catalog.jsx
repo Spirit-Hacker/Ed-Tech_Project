@@ -48,7 +48,7 @@ const Catalog = () => {
     }, [categoryId]);
 
   return (
-    <div className=" box-content bg-richblack-800 px-4">
+    <div className="box-content bg-richblack-800 px-4">
         
         <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
             <p className="text-sm text-richblack-300">{`Home / Catalog / `}<span className="text-yellow-25">{catalogPageData?.data?.selectedCategory?.name}</span></p>
@@ -58,8 +58,8 @@ const Catalog = () => {
 
         <div>
             {/* Section 1 */}
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading text-white">Course to get you started</div>
+            <div className="mx-auto box-content w-full max-w-maxContentTab px-4 lg:max-w-maxContent">
+                <div className="section_heading text-white mt-[-50px]">Course to get you started</div>
                 <div className="my-4 flex border-b border-b-richblack-600 text-sm">
                     <p
                         className={`px-4 py-2 ${
@@ -96,12 +96,12 @@ const Catalog = () => {
             </div>
 
             {/* Section 3 */}
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 lg:max-w-maxContent">
                 <div className="section_heading text-white">Frequently Bought</div>
                 <div className="py-8">
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {
-                            catalogPageData?.data?.topSellingCourse?.map((course, index) => (
+                            catalogPageData?.data?.topSellingCourse?.slice(0, 4)?.map((course, index) => (
                                 // eslint-disable-next-line
                                 <Course_Card course = {course} key = {index} height = {`h-[400px]`}/>
                             ))
@@ -110,7 +110,7 @@ const Catalog = () => {
                 </div>
             </div>
         </div>
-
+        <hr className="text-richblack-700"/>
         <Footer/>
     </div>
   )

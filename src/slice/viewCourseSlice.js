@@ -21,11 +21,11 @@ const viewCourseSlice = createSlice({
       state.totalNoOfLectures = action.payload
     },
     setCompletedLectures: (state, action) => {
-      localStorage.setItem("completedLectures", JSON.stringify([...state.completedLectures, action.payload]))
-      state.completedLectures = [...state.completedLectures, action.payload]
+      // localStorage.setItem("completedLectures", JSON.stringify([...state.completedLectures, action.payload]))
+      state.completedLectures = action.payload
     },
     updateCompletedLectures: (state, action) => {
-      localStorage.setItem("completedLectures", JSON.stringify([...state.completedLectures, action.payload]))
+      // localStorage.setItem("completedLectures", JSON.stringify([...state.completedLectures, action.payload]))
       state.completedLectures = [...state.completedLectures, action.payload]
     },
   },

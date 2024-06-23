@@ -236,3 +236,37 @@ exports.getEnrolledCourses = async (req, res) => {
       })
     }
 };
+
+exports.instructorDashboard = async (req, res) => {
+  try {
+    const instructorsCourses = await Course.find({instructor: req.user.id});
+
+    const instructorCourseStats = instructorsCourses.map((course) => {
+      const totalStudents = course.studentsEnrolled.length;
+      const totalProfitGenerated = totalStudents * course.price;
+
+      const courseData = {
+        _id: course._id,
+        courseName: course.courseName,
+        courseDescription: course.courseDescription,
+        totalStudents: totalStudents,
+        totalProfitGenerated: totalProfitGenerated
+      }
+
+      return courseData;
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Instructor stats fetched successfully",
+      data: instructorCourseStats
+    });
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
+  }
+}

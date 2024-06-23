@@ -169,7 +169,7 @@ const Footer = () => {
                 }
             </div>
             <div className='text-richblack-300 text-sm'>
-                Made with ❤️ by Pranil Dhutraj © 2023 StudyNotion
+                Made with ❤️ by Pranil Dhutraj © {new Date(Date.now()).getFullYear()} StudyNotion
             </div>
         </div>
 

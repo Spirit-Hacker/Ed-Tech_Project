@@ -27,6 +27,7 @@ import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import InstructorStatistics from "./components/core/Dashboard/InstructorStats/InstructorStatistics";
 
 function App() {
 
@@ -133,6 +134,10 @@ function App() {
           {
             user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
               <>
+                <Route
+                  path="/dashboard/instructor"
+                  element={<InstructorStatistics/>}
+                />
                 <Route
                   path="/dashboard/my-courses"
                   element={<MyCourses/>}

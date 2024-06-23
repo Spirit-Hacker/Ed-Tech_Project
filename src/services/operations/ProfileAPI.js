@@ -8,7 +8,8 @@ import { logout } from "./authAPI"
 const {
   GET_USER_DETAILS_API,
   GET_USER_ENROLLED_COURSES_API,
-  GET_INSTRUCTOR_DATA_API,
+  // GET_INSTRUCTOR_DATA_API,
+  GET_INSTRUCTOR_STATS_API
 } = profileEndpoints
 
 export function getUserDetails(token, navigate) {
@@ -67,19 +68,48 @@ export async function getUserEnrolledCourses(token) {
   return result
 }
 
-export async function getInstructorData(token) {
-  const toastId = toast.loading("Loading...")
-  let result = []
+// export async function getInstructorData(token) {
+//   const toastId = toast.loading("Loading...")
+//   let result = []
+//   try {
+//     const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
+//       Authorization: `Bearer ${token}`,
+//     })
+//     console.log("GET_INSTRUCTOR_DATA_API API RESPONSE............", response)
+//     result = response?.data?.courses
+//   } catch (error) {
+//     console.log("GET_INSTRUCTOR_DATA_API API ERROR............", error)
+//     toast.error("Could Not Get Instructor Data")
+//   }
+//   toast.dismiss(toastId)
+//   return result
+// }
+
+export async function getInstructorStats(token) {
+  const toastId = toast.loading("Loading...");
+  let result = [];
+
   try {
-    const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
-      Authorization: `Bearer ${token}`,
-    })
-    console.log("GET_INSTRUCTOR_DATA_API API RESPONSE............", response)
-    result = response?.data?.courses
-  } catch (error) {
-    console.log("GET_INSTRUCTOR_DATA_API API ERROR............", error)
-    toast.error("Could Not Get Instructor Data")
+    const response = await apiConnector("GET", GET_INSTRUCTOR_STATS_API, null, {
+      Authorisation: `Bearer ${token}`
+    });
+
+    if(!response.data.success){
+      throw new Error(response.data.message);
+    }
+
+    if(response.data.success){
+      toast.success(response.data.message);
+    }
+
+    console.log("GET_INSTRUCTOR_STATS_API API..........", response);
+    result = response.data.data;
   }
-  toast.dismiss(toastId)
-  return result
+  catch (error) {
+    console.log("Get Instructor Stats Data API ERROR............", error);
+    toast.error("Could Not Get Instructor Stats Data");
+  }
+
+  toast.dismiss(toastId);
+  return result;
 }
