@@ -32,8 +32,8 @@ const PublishCourse = () => {
     }
 
     const handlePublishCourse = async() => {
-        if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true
-        || course?.status === COURSE_STATUS.DRAFT && getValues("public") === false){
+        if((course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true)
+        || (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
             // no updations in the form
             goToCourses();
             return;

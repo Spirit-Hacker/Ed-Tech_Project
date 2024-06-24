@@ -91,7 +91,7 @@ const InstructorStatistics = () => {
                             {
                                 courses.slice(0, 3).map((course) => (
                                     <div className="w-1/3">
-                                        <img src={course.thumbnail} className="h-[201px] w-full rounded-md object-cover"/>
+                                        <img src={course.thumbnail} alt="thumbnail" className="h-[201px] w-full rounded-md object-cover"/>
                                         <div className="mt-3 w-full">
                                             <p className="text-sm font-medium text-richblack-50">{course.courseName}</p>
                                             <div className="mt-1 flex items-center space-x-2">

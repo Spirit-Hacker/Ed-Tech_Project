@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../../slice/cartSlice';
@@ -6,7 +6,7 @@ import copy from "copy-to-clipboard";
 import { toast } from 'react-hot-toast';
 import { ACCOUNT_TYPE } from '../../../utils/constants';
 import { BsFillCaretRightFill } from "react-icons/bs";
-import { FaShareSquare } from "react-icons/fa";
+// import { FaShareSquare } from "react-icons/fa";
 
 const CourseDetailsCard = ({
     course,
@@ -53,7 +53,7 @@ const CourseDetailsCard = ({
   return (
     <>
         <div className={`flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5`}>
-            <img src = {thumbnail} className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"/>
+            <img src = {thumbnail} alt="thumbnail" className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"/>
             <div className="space-x-3 pb-4 text-3xl font-semibold">
                 Rs. {price}
             </div>

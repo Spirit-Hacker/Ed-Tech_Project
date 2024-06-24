@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import RatingStars from '../../common/RatingStars'
 import getAverageRating from '../../../utils/getAvgRating';
 
-const Course_Card = ({
+const CourseCard = ({
     course,
     height
 }) => {
@@ -39,4 +39,4 @@ const Course_Card = ({
   )
 }
 
-export default Course_Card
+export default CourseCard;

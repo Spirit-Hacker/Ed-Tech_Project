@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { buyCourse } from '../services/operations/studentFeaturesAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCourseDetails, getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
+import { getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
 import getAverageRating from '../utils/getAvgRating';
-import Error from './Error';
+// import Error from './Error';
 import ConfirmationModal from '../components/common/ConfirmationModal';
 import RatingStars from "../components/common/RatingStars";
 import { formateDate } from '../services/formatDate';
@@ -18,7 +18,7 @@ const CourseDetails = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { loading } = useSelector((state) => state.profile);
-    const { paymentLoading } = useSelector((state) => state.course);
+    // const { paymentLoading } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth);
     const { user } = useSelector((state) => state.profile);
     const { courseId } = useParams();
@@ -97,7 +97,6 @@ const CourseDetails = () => {
     // }
 
     const {
-        _id,
         courseName,
         courseDescription,
         thumbnail,

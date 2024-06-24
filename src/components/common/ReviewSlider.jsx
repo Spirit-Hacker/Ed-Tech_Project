@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import ReactStars from "react-rating-stars-component";
 import { apiConnector } from '../../services/apiConnector';
 import { ratingsEndpoints } from '../../services/apis';
-import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
+// import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 import { FaStar } from 'react-icons/fa';
 
 const ReviewSlider = () => {
