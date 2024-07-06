@@ -62,14 +62,17 @@ exports.categoryPageDetails = async(req, res) => {
         const {categoryId} = req.body;
 
         // get courses for specified category id
-        const selectedCategory = await Category.findById({_id: categoryId})
-                                        .populate({
-                                            path: 'course',
-                                            match: {status: "Published"},
-                                            populate: "ratingAndReviews",
-                                            populate: "instructor"
-                                        })
-                                        .exec();
+        const selectedCategory = await Category.findById(categoryId)
+                                    .populate({
+                                        path: "course",
+                                        match: { status: "Published" },
+                                        populate: [
+                                            { path: "ratingAndReviews" },
+                                            { path: "instructor" }
+                                        ]
+                                    })
+                                    .exec();
+
 
         // validation
         if(!selectedCategory){
@@ -87,9 +90,12 @@ exports.categoryPageDetails = async(req, res) => {
                                         },
                                     },
         ).populate({
-            path: 'course',
-            populate: "ratingAndReviews",
-            populate: "instructor"
+            path: "course",
+            match: { status: "Published" },
+            populate: [
+                { path: "ratingAndReviews" },
+                { path: "instructor" }
+            ]
         })
         .exec();
 
@@ -103,9 +109,13 @@ exports.categoryPageDetails = async(req, res) => {
         const allCategories = await Category.find()
         .populate({
             path: "course",
-            populate: "ratingAndReviews",
-            populate: "instructor"
-        }).exec();
+            match: { status: "Published" },
+            populate: [
+                { path: "ratingAndReviews" },
+                { path: "instructor" }
+            ]
+        })
+        .exec();
 
         const allCourses = allCategories.flatMap( (category) => category.course )
         const topSellingCourse = allCourses.sort( (a, b) => a.sold - b.sold).slice(0, 10)

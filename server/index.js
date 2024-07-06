@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4000;
 // connect database
 database.connect();
 
-// middleware
+// middleware https://studynotion-frontend-rosy.vercel.app
 app.use(express.json());
 app.use(cookieParser());
 app.use(

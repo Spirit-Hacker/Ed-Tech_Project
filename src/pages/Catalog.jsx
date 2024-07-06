@@ -80,7 +80,7 @@ const Catalog = () => {
                 </div>
                 <div>
                     <CourseSlider
-                        courses = {catalogPageData?.data?.selectedCategory?.course}
+                        courses={catalogPageData?.data?.selectedCategory?.course}
                     />
                 </div>
             </div>
